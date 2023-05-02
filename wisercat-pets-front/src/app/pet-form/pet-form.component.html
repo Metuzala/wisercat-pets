@@ -1,0 +1,50 @@
+<div class="container">
+<div class="py-5 text-center">
+    <h2>Add a new pet</h2>
+</div>
+
+<div class="row">
+<div class="col-md-12 order-md-1">
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" id="id" formControlName="id" />
+    <div class="mb-3">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter name" required>
+        <div *ngIf="submitted && f['name'].errors" class="text-danger">Name is required</div>
+    </div>
+    <div class="mb-3">
+        <label for="code">Code</label>
+        <div class="input-group">
+        <input type="number" class="form-control" id="code" formControlName="code" placeholder="Enter code" required>
+    </div>
+        <div *ngIf="submitted && f['code'].errors" class="text-danger">Code is required</div>
+    </div>
+    <div class="mb-3">
+        <label for="type">Type</label>
+        <select class="form-select" name="type" formControlName="type" required>
+            <option *ngFor="let entry of petService.petTypes | keyvalue" value="{{entry.key}}">{{entry.value}}</option>
+        </select>
+        <div *ngIf="submitted && f['type'].errors" class="text-danger">Type is required</div>
+    </div>
+    <div class="mb-3">
+        <label for="furColor">Fur color</label>
+        <select class="form-control form-select" name="furColor" formControlName="furColor" required>
+            <option *ngFor="let entry of petService.furColors | keyvalue" value="{{entry.key}}">{{entry.value}}</option>
+        </select>
+        <div *ngIf="submitted && f['furColor'].errors" class="text-danger">Color is required</div>
+    </div>
+    <div class="mb-3">
+        <label for="countryOfOrigin">Country of Origin</label>
+        <select class="form-control form-select" name="countryOfOrigin" formControlName="countryOfOrigin" required>
+            <option *ngFor="let entry of petService.countryOptions | keyvalue" value="{{entry.key}}">{{entry.value}}
+            </option>
+        </select>
+        <div *ngIf="submitted && f['countryOfOrigin'].errors" class="text-danger">Country is required</div>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary btn-lg btn-block w-100">{{id ? 'Update' : 'Add Pet'}}</button>
+    </div>
+</form>
+</div>
+</div>
+</div>

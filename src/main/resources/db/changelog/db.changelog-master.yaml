@@ -1,0 +1,210 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: kristofer_m
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_auth
+                    references: users(username)
+              - column:
+                  name: authority
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: password
+                  value: $2a$12$Xy2.mf57wOiTueuhlWBt1uanLDsKRgskenC4hEK8d4IADuinQtzQu
+              - column:
+                 name: enabled
+                 value: true
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user2
+              - column:
+                  name: password
+                  value: $2a$12$Xy2.mf57wOiTueuhlWBt1uanLDsKRgskenC4hEK8d4IADuinQtzQu
+              - column:
+                  name: enabled
+                  value: true
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user3
+              - column:
+                  name: password
+                  value: $2a$12$Xy2.mf57wOiTueuhlWBt1uanLDsKRgskenC4hEK8d4IADuinQtzQu
+              - column:
+                  name: enabled
+                  value: true
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: authority
+                  value: 'ROLE_ADMIN'
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user2
+              - column:
+                  name: authority
+                  value: 'ROLE_ADMIN'
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user3
+              - column:
+                  name: authority
+                  value: 'ROLE_ADMIN'
+
+  - changeSet:
+      id: 2
+      author: kristofer_m
+      changes:
+        - createTable:
+            tableName: pets
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fur_color
+                  type: VARCHAR(255)
+              - column:
+                  name: country_of_origin
+                  type: VARCHAR(255)
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_pet
+                    references: users(username)
+
+        - insert:
+            tableName: pets
+            columns:
+              - column:
+                  name: name
+                  value: Mustikas
+              - column:
+                  name: code
+                  value: 202211151535
+              - column:
+                  name: type
+                  value: CAT
+              - column:
+                  name: fur_color
+                  value: BLACK
+              - column:
+                  name: country_of_origin
+                  value: ESTONIA
+              - column:
+                  name: username
+                  value: user1
+
+        - insert:
+            tableName: pets
+            columns:
+              - column:
+                  name: name
+                  value: Roy
+              - column:
+                  name: code
+                  value: 202211151536
+              - column:
+                  name: type
+                  value: DOG
+              - column:
+                  name: fur_color
+                  value: BROWN
+              - column:
+                  name: country_of_origin
+                  value: LATVIA
+              - column:
+                  name: username
+                  value: user2
+
+        - insert:
+            tableName: pets
+            columns:
+              - column:
+                  name: name
+                  value: Charles
+              - column:
+                  name: code
+                  value: 202211151537
+              - column:
+                  name: type
+                  value: HORSE
+              - column:
+                  name: fur_color
+                  value: WHITE
+              - column:
+                  name: country_of_origin
+                  value: NORWAY
+              - column:
+                  name: username
+                  value: user3

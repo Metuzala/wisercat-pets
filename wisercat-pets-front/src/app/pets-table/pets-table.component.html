@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>{{userService.user?.username}}'s pets</h2>
+    </div>
+
+    <button routerLink="/pet-form" type="button" class="btn btn-primary m-2">Add pet</button>
+    <button routerLink="/logout" type="button" class="btn btn-warning m-2">Logout</button>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" (click)="sortByName()">Name &nbsp;<i class="{{ getSortIconClass('name') }}"></i>
+                    </th>
+                    <th scope="col" (click)="sortByCode()">Code &nbsp;<i class="{{ getSortIconClass('code') }}"></i>
+                    </th>
+                    <th scope="col" (click)="sortByType()">Type &nbsp;<i class="{{ getSortIconClass('type') }}"></i>
+                    </th>
+                    <th scope="col" (click)="sortByFur()">Fur Color &nbsp;<i
+                            class="{{ getSortIconClass('furColor') }}"></i>
+                    </th>
+                    <th scope="col" (click)="sortByOrigin()">Country &nbsp;<i
+                            class="{{ getSortIconClass('countryOfOrigin') }}"></i></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let pet of petList; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.code}}</td>
+                    <td>{{getType(pet.type)}}</td>
+                    <td>{{getColor(pet.furColor)}}</td>
+                    <td>{{getCountryOfOrigin(pet.countryOfOrigin)}}</td>
+                    <td>
+                        <button [routerLink]="['/pet-form', pet.id]" type="button" class="btn btn-primary mx-2">Edit
+                            Pet</button>
+                        <button (click)="delete(pet.id)" type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
